@@ -11,17 +11,18 @@ import 'package:movieapp/data/model/upcoming_movies_responses.dart';
 class OnlineDataSources {
   static const String urlBase = "api.themoviedb.org";
   static const String simiBaseUrl = "api.themoviedb.org/3/movie/";
-  static const String apiKey = "8bcaebf0d1310c08bc2f916753bff65e";
+  static const String apiKey = "6dfe10460aba32397d0ec5fa8a3ac9d2";
   static const String popularMoviesEndPoint = "/3/movie/popular";
   static const String upcomingMoviesEndPoint = "/3/movie/upcoming";
   static const String recommendedMoviesEndPoint = "/3/movie/top_rated";
   static const String detailsScreenEndPoint = "/3/movie/";
   static const String similarMoviesEndPoint = "/similar";
   static const String searchEndPoint = "/3/search/movie";
+  static const String moviesList = "/3/genre/movie/list";
 
   static const Map<String, String> headers = {
     'Authorization':
-        'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4YmNhZWJmMGQxMzEwYzA4YmMyZjkxNjc1M2JmZjY1ZSIsInN1YiI6IjY1M2ZlYjBlZTg5NGE2MDBmZjE4MTFhMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.jotI1JAx-7oGhzLmK4xguL84xkcpLxfJ4dhKyHLJfT4',
+        'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2ZGZlMTA0NjBhYmEzMjM5N2QwZWM1ZmE4YTNhYzlkMiIsInN1YiI6IjY1NDk0ZDQwNDM0OTRmMDBlNDk0NGY1OSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.GTWqqH-EdzKsB4mSZX058fdch5HdebACBUHfo7BsHaw',
     'accept': 'application/json',
   };
 

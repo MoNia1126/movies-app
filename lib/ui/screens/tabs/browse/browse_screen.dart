@@ -23,7 +23,7 @@ class _MyHomePageState extends State<BrowseScreen> {
 
   Future<void> fetchGenres() async {
     final response = await http.get(Uri.parse(
-        'https://api.themoviedb.org/3/genre/movie/list?api_key=8bcaebf0d1310c08bc2f916753bff65e'));
+        'https://api.themoviedb.org/3/genre/movie/list?api_key=6dfe10460aba32397d0ec5fa8a3ac9d2'));
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
       setState(() {

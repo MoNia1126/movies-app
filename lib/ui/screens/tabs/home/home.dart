@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movieapp/data/model/popular_movies_responses.dart';
 import 'package:movieapp/ui/screens/tabs/home/pop_movie_model_view.dart';
-import 'package:movieapp/ui/screens/tabs/home/rec_movies/re_movie_list.dart';
+import 'package:movieapp/ui/screens/tabs/home/rec_movies/movie_list.dart';
 import 'package:movieapp/ui/screens/tabs/home/up_movies/up_movie_list.dart';
 import '../../../../widgets/error_widget.dart';
 import '../../../../widgets/loadeing_widget.dart';
@@ -25,7 +25,6 @@ class _HomeState extends State<Home> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       modelView.getPop();
@@ -100,7 +99,7 @@ class _HomeState extends State<Home> {
                       "Recommended",
                       style: TextStyle(color: Colors.white, fontSize: 18),
                     )),
-                Expanded(child: ReMovieList()),
+                Expanded(child: MovieList()),
               ],
             ),
           ),
@@ -138,7 +137,7 @@ class _HomeState extends State<Home> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(
-                    height: 4,
+                    height: 6,
                   ),
                   Row(
                     children: [
@@ -154,7 +153,7 @@ class _HomeState extends State<Home> {
                     ],
                   ),
                   const SizedBox(
-                    height: 6,
+                    height: 4,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,

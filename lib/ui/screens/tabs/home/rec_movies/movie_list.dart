@@ -3,11 +3,9 @@ import 'package:movieapp/data/model/recommended_movies_responses.dart';
 import 'package:movieapp/data/repos/movies_repo/data_sources/online_data_sources.dart';
 import '../../../../../widgets/error_widget.dart';
 import '../../../../../widgets/loadeing_widget.dart';
-import 'build_re_movie.dart';
+import 'build_movie.dart';
 
-class ReMovieList extends StatelessWidget {
-  ReMovieList({super.key});
-
+class MovieList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -29,7 +27,7 @@ class ReMovieList extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       itemCount: reMovie.length,
       itemBuilder: (context, index) {
-        return BuildReMovie(resultsRe: reMovie[index]);
+        return BuildMovie(resultsRe: reMovie[index]);
       },
     );
   }

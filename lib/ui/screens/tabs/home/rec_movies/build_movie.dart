@@ -4,10 +4,10 @@ import 'package:movieapp/data/model/recommended_movies_responses.dart';
 import 'package:movieapp/ui/screens/details_screen/datails_screen.dart';
 import '../../../../../widgets/loadeing_widget.dart';
 
-class BuildReMovie extends StatelessWidget {
+class BuildMovie extends StatelessWidget {
   ResultsRec resultsRe;
 
-  BuildReMovie({super.key, required this.resultsRe});
+  BuildMovie({required this.resultsRe});
 
   String baseUrl = "https://image.tmdb.org/t/p/w500";
 
