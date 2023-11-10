@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:movieapp/ui/screens/tabs/search/build_search_movie_list.dart';
 
 class SearchScreen extends StatefulWidget {
-  static const String routeName = "Search Screen";
-
   SearchScreen({super.key});
 
   @override

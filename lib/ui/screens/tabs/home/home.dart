@@ -2,17 +2,16 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movieapp/data/model/popular_movies_responses.dart';
 import 'package:movieapp/ui/screens/tabs/home/pop_movie_model_view.dart';
 import 'package:movieapp/ui/screens/tabs/home/rec_movies/movie_list.dart';
 import 'package:movieapp/ui/screens/tabs/home/up_movies/up_movie_list.dart';
+
+import '../../../../data/model/movies_by_search_responses.dart';
 import '../../../../widgets/error_widget.dart';
 import '../../../../widgets/loadeing_widget.dart';
 import '../../details_screen/datails_screen.dart';
 
 class Home extends StatefulWidget {
-  static const String routeName = "Home";
-
   Home({super.key});
 
   @override
@@ -49,7 +48,7 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget buildPopMovieHome(List<ResultsPop> results) {
+  Widget buildPopMovieHome(List<Results> results) {
     return Column(
       children: [
         Expanded(
@@ -108,7 +107,7 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget buildPopMovie(ResultsPop movie) {
+  Widget buildPopMovie(Results movie) {
     return Stack(
       alignment: Alignment.bottomLeft,
       children: [

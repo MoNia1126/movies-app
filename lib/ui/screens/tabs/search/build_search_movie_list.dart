@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:movieapp/data/model/movies_by_search_responses.dart';
+
 import '../../../../data/repos/movies_repo/data_sources/online_data_sources.dart';
-import 'build_search_movie.dart';
+import '../../../../widgets/movie_widget.dart';
 
 class BuildSearchMovieList extends StatelessWidget {
   final String q;
@@ -41,7 +42,7 @@ class BuildSearchMovieList extends StatelessWidget {
     return ListView.builder(
       itemCount: resultSear.length,
       itemBuilder: (context, index) {
-        return BuildSearchMovie(resultsSear: resultSear[index]);
+        return MovieWidget(movie: resultSear[index]);
       },
     );
   }

@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movieapp/data/repos/movies_repo/data_sources/online_data_sources.dart';
 import 'package:movieapp/data/repos/movies_repo/movies_repo.dart';
 
+import '../../../../data/model/movies_by_search_responses.dart';
 import '../../../../data/model/popular_movies_responses.dart';
 
 class PopMoviesModelView extends Cubit<MoviesStatePop> {
@@ -27,7 +28,7 @@ class PopMoviesModelView extends Cubit<MoviesStatePop> {
 class MoviesStatePop {}
 
 class SuccessStatePop extends MoviesStatePop {
-  List<ResultsPop> results = [];
+  List<Results> results = [];
 
   SuccessStatePop(this.results);
 }

@@ -1,11 +1,12 @@
 import 'dart:convert';
 import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:movieapp/data/model/categoryResponse.dart';
+import 'package:movieapp/ui/screens/tabs/browse/filtered_movies_screen.dart';
 
 class BrowseScreen extends StatefulWidget {
-  static const routeName = "Browse Screen";
-
   const BrowseScreen({super.key});
 
   @override
@@ -13,7 +14,7 @@ class BrowseScreen extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<BrowseScreen> {
-  List<dynamic> genres = [];
+  List<Genres> genres = [];
 
   @override
   void initState() {
@@ -24,10 +25,11 @@ class _MyHomePageState extends State<BrowseScreen> {
   Future<void> fetchGenres() async {
     final response = await http.get(Uri.parse(
         'https://api.themoviedb.org/3/genre/movie/list?api_key=6dfe10460aba32397d0ec5fa8a3ac9d2'));
+    var json = jsonDecode(response.body);
+    var categoryResponse = CategoryResponse.fromJson(json);
     if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
       setState(() {
-        genres = data['genres'];
+        genres = categoryResponse.genres ?? [];
       });
     } else {
       print('Failed to fetch genres');
@@ -86,13 +88,16 @@ class _MyHomePageState extends State<BrowseScreen> {
             return Padding(
               padding: const EdgeInsets.only(left: 5, bottom: 4, right: 5),
               child: GridTile(
-                child: Stack(
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        ///Click to another screen
-                      },
-                      child: Container(
+                child: InkWell(
+                  onTap: () {
+                    ///Click to another screen
+                    Navigator.of(context).pushNamed(
+                        FilteredMoviesScreen.routeName,
+                        arguments: genres[index]);
+                  },
+                  child: Stack(
+                    children: [
+                      Container(
                         margin: const EdgeInsets.symmetric(
                             vertical: 15, horizontal: 15),
                         width: 300,
@@ -107,29 +112,29 @@ class _MyHomePageState extends State<BrowseScreen> {
                           ),
                         ),
                       ),
-                    ),
-                    Positioned(
-                        top: 5,
-                        bottom: 5,
-                        left: 5,
-                        right: 5,
-                        child: ClipRRect(
-                          child: BackdropFilter(
-                            filter: ImageFilter.blur(sigmaX: 2, sigmaY: 1),
-                            child: Container(
-                              child: Center(
-                                child: Text(
-                                  genres[index]['name'],
-                                  style: const TextStyle(
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white),
+                      Positioned(
+                          top: 5,
+                          bottom: 5,
+                          left: 5,
+                          right: 5,
+                          child: ClipRRect(
+                            child: BackdropFilter(
+                              filter: ImageFilter.blur(sigmaX: 2, sigmaY: 1),
+                              child: Container(
+                                child: Center(
+                                  child: Text(
+                                    genres[index].name ?? '',
+                                    style: const TextStyle(
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        )),
-                  ],
+                          )),
+                    ],
+                  ),
                 ),
               ),
             );
