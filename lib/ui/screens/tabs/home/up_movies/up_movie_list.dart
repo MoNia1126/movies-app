@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:movieapp/data/model/upcoming_movies_responses.dart';
 import 'package:movieapp/data/repos/movies_repo/data_sources/online_data_sources.dart';
 import 'package:movieapp/ui/screens/tabs/home/up_movies/build_up_movie.dart';
+
+import '../../../../../data/model/movies_by_search_responses.dart';
 import '../../../../../widgets/error_widget.dart';
 import '../../../../../widgets/loadeing_widget.dart';
 
@@ -26,7 +27,7 @@ class UpMovieList extends StatelessWidget {
     );
   }
 
-  Widget buildMoviesList(List<ResultsUp> upMovie) {
+  Widget buildMoviesList(List<Results> upMovie) {
     upLength = upMovie.length;
     return ListView.builder(
       scrollDirection: Axis.horizontal,

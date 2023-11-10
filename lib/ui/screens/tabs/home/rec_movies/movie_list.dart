@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:movieapp/data/model/recommended_movies_responses.dart';
 import 'package:movieapp/data/repos/movies_repo/data_sources/online_data_sources.dart';
+
+import '../../../../../data/model/movies_by_search_responses.dart';
 import '../../../../../widgets/error_widget.dart';
 import '../../../../../widgets/loadeing_widget.dart';
 import 'build_movie.dart';
@@ -22,7 +23,7 @@ class MovieList extends StatelessWidget {
     );
   }
 
-  Widget buildMoviesList(List<ResultsRec> reMovie) {
+  Widget buildMoviesList(List<Results> reMovie) {
     return ListView.builder(
       scrollDirection: Axis.horizontal,
       itemCount: reMovie.length,

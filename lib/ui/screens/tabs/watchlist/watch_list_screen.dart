@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
 class WatchListScreen extends StatelessWidget {
-  static const String routeName = "WatchList";
-
   const WatchListScreen({super.key});
 
   @override

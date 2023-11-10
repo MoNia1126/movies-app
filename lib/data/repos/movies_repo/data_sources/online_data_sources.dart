@@ -1,7 +1,9 @@
 import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:movieapp/data/model/details_movie_responses.dart';
+import 'package:movieapp/data/model/filteredMoviesResponse.dart';
 import 'package:movieapp/data/model/movies_by_search_responses.dart';
 import 'package:movieapp/data/model/popular_movies_responses.dart';
 import 'package:movieapp/data/model/recommended_movies_responses.dart';
@@ -19,6 +21,7 @@ class OnlineDataSources {
   static const String similarMoviesEndPoint = "/similar";
   static const String searchEndPoint = "/3/search/movie";
   static const String moviesList = "/3/genre/movie/list";
+  static const String filteredMoviesEndPoint = "/3/discover/movie";
 
   static const Map<String, String> headers = {
     'Authorization':
@@ -40,7 +43,7 @@ class OnlineDataSources {
     throw Exception("Something went wrong...!");
   }
 
-  static Future<List<ResultsUp>> getUpcomingMovies() async {
+  static Future<List<Results>> getUpcomingMovies() async {
     Uri url = Uri.https(urlBase, upcomingMoviesEndPoint);
     Response response = await http.get(url, headers: headers);
     Map json = jsonDecode(response.body);
@@ -54,7 +57,7 @@ class OnlineDataSources {
     throw Exception("Something went wrong...!");
   }
 
-  static Future<List<ResultsRec>> getRecommendedMovies() async {
+  static Future<List<Results>> getRecommendedMovies() async {
     Uri url = Uri.https(urlBase, recommendedMoviesEndPoint);
     Response response = await http.get(url, headers: headers);
     Map json = jsonDecode(response.body);
@@ -82,7 +85,7 @@ class OnlineDataSources {
     throw Exception("Something went wrong...!");
   }
 
-  static Future<List<ResultsSim>> getSimilarMovies(String id) async {
+  static Future<List<Results>> getSimilarMovies(String id) async {
     Uri url = Uri.parse("https://$simiBaseUrl$id$similarMoviesEndPoint");
     Response response = await http.get(url, headers: headers);
     Map json = jsonDecode(response.body);
@@ -108,5 +111,16 @@ class OnlineDataSources {
       return moviesBySearchResponses.results!;
     }
     throw Exception("Something went wrong...!");
+  }
+
+  static Future<FilteredMoviesResponse> getFilteredMovies(
+      String genresId) async {
+    Uri url =
+        Uri.https(urlBase, filteredMoviesEndPoint, {"with_genres": genresId});
+
+    var response = await http.get(url, headers: headers);
+    var json = jsonDecode(response.body);
+    var filteredMoviesResponse = FilteredMoviesResponse.fromJson(json);
+    return filteredMoviesResponse;
   }
 }

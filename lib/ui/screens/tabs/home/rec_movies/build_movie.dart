@@ -1,11 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:movieapp/data/model/recommended_movies_responses.dart';
 import 'package:movieapp/ui/screens/details_screen/datails_screen.dart';
+
+import '../../../../../data/model/movies_by_search_responses.dart';
 import '../../../../../widgets/loadeing_widget.dart';
 
 class BuildMovie extends StatelessWidget {
-  ResultsRec resultsRe;
+  Results resultsRe;
 
   BuildMovie({required this.resultsRe});
 
