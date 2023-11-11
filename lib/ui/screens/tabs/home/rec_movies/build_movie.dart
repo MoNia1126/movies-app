@@ -3,12 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:movieapp/ui/screens/details_screen/datails_screen.dart';
 
 import '../../../../../data/model/movies_by_search_responses.dart';
+import '../../../../../firebase_utils.dart';
 import '../../../../../widgets/loadeing_widget.dart';
 
-class BuildMovie extends StatelessWidget {
-  Results resultsRe;
+class BuildMovie extends StatefulWidget {
+  Movie resultsRe;
 
   BuildMovie({required this.resultsRe});
+
+  @override
+  State<BuildMovie> createState() => _BuildMovieState();
+}
+
+class _BuildMovieState extends State<BuildMovie> {
+  bool isAdded = false;
 
   String baseUrl = "https://image.tmdb.org/t/p/w500";
 
@@ -17,7 +25,7 @@ class BuildMovie extends StatelessWidget {
     return InkWell(
       onTap: () {
         Navigator.pushNamed(context, DetailsScreen.routeName,
-            arguments: resultsRe.id.toString());
+            arguments: widget.resultsRe.id.toString());
       },
       child: Column(
         children: [
@@ -34,7 +42,7 @@ class BuildMovie extends StatelessWidget {
                         topLeft: Radius.circular(6)),
                     child: Stack(children: [
                       CachedNetworkImage(
-                        imageUrl: "$baseUrl${resultsRe.posterPath}",
+                        imageUrl: "$baseUrl${widget.resultsRe.posterPath}",
                         height: MediaQuery.of(context).size.height * .19,
                         width: MediaQuery.of(context).size.width * .28,
                         fit: BoxFit.fill,
@@ -46,9 +54,19 @@ class BuildMovie extends StatelessWidget {
                         ),
                       ),
                       InkWell(
-                          onTap: () {},
-                          child: const Image(
-                              image: AssetImage('assets/images/bookmark.png'))),
+                          onTap: () {
+                            isAdded = !isAdded;
+                            if (isAdded) {
+                              FirebaseUtils.addMovie(widget.resultsRe);
+                            } else {
+                              FirebaseUtils.deleteMovie(widget.resultsRe);
+                            }
+                            setState(() {});
+                          },
+                          child: Image(
+                              image: AssetImage(isAdded
+                                  ? 'assets/images/done_icon.png'
+                                  : 'assets/images/bookmark.png'))),
                     ])),
               ),
             ],
@@ -72,7 +90,7 @@ class BuildMovie extends StatelessWidget {
                           width: 4,
                         ),
                         Text(
-                          resultsRe.voteAverage!.toStringAsFixed(1),
+                          widget.resultsRe.voteAverage!.toStringAsFixed(1),
                           style: const TextStyle(
                               fontSize: 11,
                               color: Colors.white,
@@ -85,7 +103,7 @@ class BuildMovie extends StatelessWidget {
                     ),
                     SizedBox(
                         width: 200,
-                        child: Text(resultsRe.title ?? "",
+                        child: Text(widget.resultsRe.title ?? "",
                             style: const TextStyle(
                                 fontWeight: FontWeight.w400,
                                 color: Colors.white,
@@ -99,7 +117,7 @@ class BuildMovie extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          "${DateTime.tryParse(resultsRe.releaseDate!)?.year ?? "".toString()}",
+                          "${DateTime.tryParse(widget.resultsRe.releaseDate!)?.year ?? "".toString()}",
                           style: const TextStyle(
                               fontSize: 10,
                               color: Colors.white,
@@ -109,7 +127,7 @@ class BuildMovie extends StatelessWidget {
                           width: 4,
                         ),
                         Text(
-                          resultsRe.adult! ? "R" : "PG-3",
+                          widget.resultsRe.adult! ? "R" : "PG-3",
                           style: const TextStyle(
                               fontSize: 10,
                               color: Colors.white54,

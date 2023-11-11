@@ -5,7 +5,7 @@ import 'package:movieapp/ui/screens/details_screen/datails_screen.dart';
 import 'package:movieapp/widgets/loadeing_widget.dart';
 
 class MovieWidget extends StatelessWidget {
-  Results movie;
+  Movie movie;
 
   MovieWidget({super.key, required this.movie});
 

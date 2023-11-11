@@ -29,7 +29,7 @@ class SimilarMovieList extends StatelessWidget {
     );
   }
 
-  Widget buildMoviesList(List<Results> simMovie) {
+  Widget buildMoviesList(List<Movie> simMovie) {
     return ListView.builder(
       scrollDirection: Axis.horizontal,
       itemCount: simMovie.length,

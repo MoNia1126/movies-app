@@ -43,7 +43,7 @@ class OnlineDataSources {
     throw Exception("Something went wrong...!");
   }
 
-  static Future<List<Results>> getUpcomingMovies() async {
+  static Future<List<Movie>> getUpcomingMovies() async {
     Uri url = Uri.https(urlBase, upcomingMoviesEndPoint);
     Response response = await http.get(url, headers: headers);
     Map json = jsonDecode(response.body);
@@ -57,7 +57,7 @@ class OnlineDataSources {
     throw Exception("Something went wrong...!");
   }
 
-  static Future<List<Results>> getRecommendedMovies() async {
+  static Future<List<Movie>> getRecommendedMovies() async {
     Uri url = Uri.https(urlBase, recommendedMoviesEndPoint);
     Response response = await http.get(url, headers: headers);
     Map json = jsonDecode(response.body);
@@ -85,7 +85,7 @@ class OnlineDataSources {
     throw Exception("Something went wrong...!");
   }
 
-  static Future<List<Results>> getSimilarMovies(String id) async {
+  static Future<List<Movie>> getSimilarMovies(String id) async {
     Uri url = Uri.parse("https://$simiBaseUrl$id$similarMoviesEndPoint");
     Response response = await http.get(url, headers: headers);
     Map json = jsonDecode(response.body);
@@ -99,7 +99,7 @@ class OnlineDataSources {
     throw Exception("Something went wrong...!");
   }
 
-  static Future<List<Results>> getMoviesBySearch(String q) async {
+  static Future<List<Movie>> getMoviesBySearch(String q) async {
     Uri url = Uri.https(urlBase, searchEndPoint, {"query": q});
     Response response = await http.get(url, headers: headers);
     Map json = jsonDecode(response.body);

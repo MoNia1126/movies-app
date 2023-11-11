@@ -3,12 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:movieapp/ui/screens/details_screen/datails_screen.dart';
 
 import '../../../../data/model/movies_by_search_responses.dart';
+import '../../../../firebase_utils.dart';
 import '../../../../widgets/loadeing_widget.dart';
 
-class BuildSimMovie extends StatelessWidget {
-  Results simResults;
+class BuildSimMovie extends StatefulWidget {
+  Movie simResults;
 
   BuildSimMovie({super.key, required this.simResults});
+
+  @override
+  State<BuildSimMovie> createState() => _BuildSimMovieState();
+}
+
+class _BuildSimMovieState extends State<BuildSimMovie> {
+  bool isAdded = false;
 
   String baseUrl = "https://image.tmdb.org/t/p/w500";
 
@@ -17,7 +25,7 @@ class BuildSimMovie extends StatelessWidget {
     return InkWell(
       onTap: () {
         Navigator.pushNamed(context, DetailsScreen.routeName,
-            arguments: simResults.id.toString());
+            arguments: widget.simResults.id.toString());
       },
       child: Column(
         children: [
@@ -31,7 +39,7 @@ class BuildSimMovie extends StatelessWidget {
                         topLeft: Radius.circular(6)),
                     child: Stack(children: [
                       CachedNetworkImage(
-                        imageUrl: "$baseUrl${simResults.posterPath}",
+                        imageUrl: "$baseUrl${widget.simResults.posterPath}",
                         height: MediaQuery.of(context).size.height * .17,
                         width: MediaQuery.of(context).size.width * .26,
                         fit: BoxFit.fill,
@@ -43,9 +51,19 @@ class BuildSimMovie extends StatelessWidget {
                         ),
                       ),
                       InkWell(
-                          onTap: () {},
-                          child: const Image(
-                              image: AssetImage('assets/images/bookmark.png'))),
+                          onTap: () {
+                            isAdded = !isAdded;
+                            if (isAdded) {
+                              FirebaseUtils.addMovie(widget.simResults);
+                            } else {
+                              FirebaseUtils.deleteMovie(widget.simResults);
+                            }
+                            setState(() {});
+                          },
+                          child: Image(
+                              image: AssetImage(isAdded
+                                  ? 'assets/images/done_icon.png'
+                                  : 'assets/images/bookmark.png'))),
                     ])),
               ),
             ],
@@ -69,7 +87,7 @@ class BuildSimMovie extends StatelessWidget {
                           width: 4,
                         ),
                         Text(
-                          simResults.voteAverage!.toStringAsFixed(1),
+                          widget.simResults.voteAverage!.toStringAsFixed(1),
                           style: const TextStyle(
                               fontSize: 11,
                               color: Colors.white,
@@ -82,7 +100,7 @@ class BuildSimMovie extends StatelessWidget {
                     ),
                     SizedBox(
                         width: 200,
-                        child: Text(simResults.title ?? "",
+                        child: Text(widget.simResults.title ?? "",
                             style: const TextStyle(
                                 fontWeight: FontWeight.w400,
                                 color: Colors.white,
@@ -96,7 +114,7 @@ class BuildSimMovie extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          "${DateTime.tryParse(simResults.releaseDate!)?.year ?? "".toString()}",
+                          "${DateTime.tryParse(widget.simResults.releaseDate!)?.year ?? "".toString()}",
                           style: const TextStyle(
                               fontSize: 10,
                               color: Colors.white,
@@ -106,7 +124,7 @@ class BuildSimMovie extends StatelessWidget {
                           width: 4,
                         ),
                         Text(
-                          simResults.originalLanguage ?? "",
+                          widget.simResults.originalLanguage ?? "",
                           style: const TextStyle(
                               fontSize: 10,
                               color: Colors.white54,

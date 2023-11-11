@@ -28,7 +28,7 @@ class PopMoviesModelView extends Cubit<MoviesStatePop> {
 class MoviesStatePop {}
 
 class SuccessStatePop extends MoviesStatePop {
-  List<Results> results = [];
+  List<Movie> results = [];
 
   SuccessStatePop(this.results);
 }

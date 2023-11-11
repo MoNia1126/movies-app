@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1093777568143",
+    "project_id": "movies-e4ddc",
+    "storage_bucket": "movies-e4ddc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1093777568143:android:4c9ea4e868e9d7e863dbfa",
+        "android_client_info": {
+          "package_name": "com.example.movieapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD82qLvZf0n447-qVM3mQ-wOjS6Y2MDYm4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
