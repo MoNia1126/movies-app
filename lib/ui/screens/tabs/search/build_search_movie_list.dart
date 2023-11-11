@@ -38,7 +38,7 @@ class BuildSearchMovieList extends StatelessWidget {
     );
   }
 
-  Widget buildMovieList(List<Results> resultSear) {
+  Widget buildMovieList(List<Movie> resultSear) {
     return ListView.builder(
       itemCount: resultSear.length,
       itemBuilder: (context, index) {

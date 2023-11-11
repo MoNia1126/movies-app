@@ -23,7 +23,7 @@ class MovieList extends StatelessWidget {
     );
   }
 
-  Widget buildMoviesList(List<Results> reMovie) {
+  Widget buildMoviesList(List<Movie> reMovie) {
     return ListView.builder(
       scrollDirection: Axis.horizontal,
       itemCount: reMovie.length,

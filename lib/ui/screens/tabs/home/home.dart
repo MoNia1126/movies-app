@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movieapp/firebase_utils.dart';
 import 'package:movieapp/ui/screens/tabs/home/pop_movie_model_view.dart';
 import 'package:movieapp/ui/screens/tabs/home/rec_movies/movie_list.dart';
 import 'package:movieapp/ui/screens/tabs/home/up_movies/up_movie_list.dart';
@@ -21,6 +22,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   PopMoviesModelView modelView = PopMoviesModelView();
   String baseUrl = "https://image.tmdb.org/t/p/w500";
+  bool isAdded = false;
 
   @override
   void initState() {
@@ -48,7 +50,7 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget buildPopMovieHome(List<Results> results) {
+  Widget buildPopMovieHome(List<Movie> results) {
     return Column(
       children: [
         Expanded(
@@ -107,7 +109,7 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget buildPopMovie(Results movie) {
+  Widget buildPopMovie(Movie movie) {
     return Stack(
       alignment: Alignment.bottomLeft,
       children: [
@@ -199,9 +201,19 @@ class _HomeState extends State<Home> {
               ),
             ),
             InkWell(
-                onTap: () {},
-                child: const Image(
-                    image: AssetImage('assets/images/bookmark.png')))
+                onTap: () {
+                  isAdded = !isAdded;
+                  if (isAdded) {
+                    FirebaseUtils.addMovie(movie);
+                  } else {
+                    FirebaseUtils.deleteMovie(movie);
+                  }
+                  setState(() {});
+                },
+                child: Image(
+                    image: AssetImage(isAdded
+                        ? 'assets/images/done_icon.png'
+                        : 'assets/images/bookmark.png')))
           ]),
         )
       ],

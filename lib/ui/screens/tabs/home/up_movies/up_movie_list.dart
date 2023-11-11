@@ -27,7 +27,7 @@ class UpMovieList extends StatelessWidget {
     );
   }
 
-  Widget buildMoviesList(List<Results> upMovie) {
+  Widget buildMoviesList(List<Movie> upMovie) {
     upLength = upMovie.length;
     return ListView.builder(
       scrollDirection: Axis.horizontal,
