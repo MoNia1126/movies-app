@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:movieapp/splash_screen.dart';
 import 'package:movieapp/ui/screens/details_screen/datails_screen.dart';
 import 'package:movieapp/ui/screens/home_screen.dart';
 import 'package:movieapp/ui/screens/tabs/browse/filtered_movies_screen.dart';
@@ -23,11 +24,12 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         routes: {
+          SplashScreen.routeName: (_) => const SplashScreen(),
           HomeScreen.routeName: (_) => const HomeScreen(),
           DetailsScreen.routeName: (_) => DetailsScreen(),
           FilteredMoviesScreen.routeName: (_) => const FilteredMoviesScreen()
         },
-        initialRoute: HomeScreen.routeName,
+        initialRoute: SplashScreen.routeName,
       ),
     );
   }
